@@ -10,11 +10,14 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Button;
 
 public class Test_Dialog extends AppCompatDialogFragment {
     //The Objects for the EditText view in the Dialog and the listener
     EditText editTextInput;
     ExampleDialogListener listener;
+    Button buttonSubmit;
+    Button buttonCancel;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,12 +28,34 @@ public class Test_Dialog extends AppCompatDialogFragment {
         //Inflate the View using the layout for the AlertDialog
         View view = inflater.inflate(R.layout.layout_dialog, null);
 
-        //Use the inflated View object to build the AlertDialog
-        builder.setView(view).setTitle("Enter Zipcode"); 
-
-        //EditText Object for the input EditText View
+        //EditText and Button Objects for the Views in the layout
         editTextInput = view.findViewById(R.id.input);
-        editTextInput.setOnKeyListener();
+        buttonSubmit = view.findViewById(R.id.buttonSubmit);
+        buttonCancel = view.findViewById(R.id.buttonCancel);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+        /*
+        This is where I would use the if Statement to change the text color based on the content of the
+        EditTextObject...or in this case, editTextInput
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // DO SOMETHINGS
+                dialogBuilder.dismiss();
+            }
+        });
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
+        */
+        //Use the inflated View object to build the AlertDialog
+        builder.setView(view).setTitle("Enter Zipcode");
+
         //Return the AlertDialog
         return builder.create();
     }
