@@ -15,7 +15,7 @@ import android.widget.Button;
 public class Test_Dialog extends AppCompatDialogFragment {
     //The Objects for the EditText view in the Dialog and the listener
     EditText editTextInput;
-    ExampleDialogListener listener;
+    ExampleDialogListeners listener;
     Button buttonSubmit;
     Button buttonCancel;
 
@@ -42,14 +42,17 @@ public class Test_Dialog extends AppCompatDialogFragment {
         /*
         This is where I would use the if Statement to change the text color based on the content of the
         EditTextObject...or in this case, editTextInput
-        button1.setOnClickListener(new View.OnClickListener() {
+        */
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // DO SOMETHINGS
-                dialogBuilder.dismiss();
+                String input = editTextInput.getText().toString();
+                listener.applyTexts(input);
+                dismiss();
             }
         });
 
+        /*
         dialogBuilder.setView(dialogView);
         dialogBuilder.show();
         */
@@ -60,19 +63,22 @@ public class Test_Dialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
+    //Exception handler method
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         try {
-            listener = (ExampleDialogListener) context;
+            listener = (ExampleDialogListeners) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +
-                    "must implement ExampleDialogListener");
+                    "must implement ");
         }
     }
 
-    public interface ExampleDialogListener {
-        void applyTexts(String username);
+    //This will allow the Main Activity to accept information from this Dialog
+    //Activity must implement Test_Dialog.(name of the interface below)
+    public interface ExampleDialogListeners {
+        void applyTexts(String input);
     }
 }
