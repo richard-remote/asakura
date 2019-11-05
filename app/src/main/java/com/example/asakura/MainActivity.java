@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements Test_Dialog.Examp
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+                openDialog();   
             }
         });
     }
